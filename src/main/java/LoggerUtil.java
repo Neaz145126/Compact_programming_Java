@@ -1,17 +1,26 @@
-import java.io.*;
-import java.nio.file.*;
-import java.time.LocalDate;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * CONCURRENCY UPDATE:
  * - log() method is synchronized.
  * - ADDED: Static methods for the GUI to read log files.
+ *
+ * REFACTOR:
+ * - Migrated from 'java.io.File' to 'java.nio.file.Path' for modern file handling.
+ * - Implemented 'handleExistingLog' to move old logs to an 'Archive' sub-directory.
+ * - Simplified static helper methods using new file APIs.
  */
 public class LoggerUtil {
 
@@ -21,46 +30,108 @@ public class LoggerUtil {
             DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss");
 
     private final String logType;
-    private final File logDir = new File("Logs");
-    private final File logFile;
+    private final Path logDir = Path.of("Logs");
+    private final Path logFile;
 
     public LoggerUtil(String logType) {
         this.logType = logType;
-        if (!logDir.exists()) logDir.mkdirs();
+        try {
+            // Ensure the main "Logs" directory exists
+            if (!Files.exists(logDir)) {
+                Files.createDirectories(logDir);
+            }
+        } catch (IOException e) {
+            System.err.println("CRITICAL: Could not create Logs directory at " + logDir.toAbsolutePath());
+            // Fallback to a non-existent file, write operations will fail
+            this.logFile = logDir.resolve("error.txt");
+            return;
+        }
 
+        // Create the new log file path
         String filename = LocalDateTime.now().format(FILE_DATE_FORMAT) + "-" + logType + ".txt";
-        this.logFile = new File(logDir, filename);
+        this.logFile = logDir.resolve(filename);
 
+        // --- This is the new, implemented logic ---
         handleExistingLog();
+        // ---
+
         createNewLogHeader();
     }
 
+    /**
+     * REFACTORED: This method now moves old logs to an "Archive" folder
+     * to keep the main "Logs" directory clean.
+     */
     private void handleExistingLog() {
-        // This logic is unchanged...
-        File[] existingLogs = logDir.listFiles((dir, name) -> name.endsWith("-" + logType + ".txt"));
-        if (existingLogs == null || existingLogs.length == 0) return;
+        Path archiveDir = logDir.resolve("Archive");
+        try {
+            // 1. Ensure the "Archive" directory exists
+            if (!Files.exists(archiveDir)) {
+                Files.createDirectories(archiveDir);
+            }
 
-        // Don't archive for this demo, just let them co-exist
-        // This simplifies the log viewer
-    }
+            // 2. Find all old log files matching our logType
+            String logSuffix = "-" + logType + ".txt";
+            List<Path> oldLogs;
+            try (Stream<Path> stream = Files.list(logDir)) {
+                oldLogs = stream
+                        .filter(Files::isRegularFile) // Make sure it's a file
+                        .filter(path -> path.getFileName().toString().endsWith(logSuffix))
+                        .collect(Collectors.toList());
+            }
 
-    private void createNewLogHeader() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) {
-            writer.write("==== Log started at [" + LocalDateTime.now().format(LOG_DATE_FORMAT) + "] ====");
-            writer.newLine();
+            // 3. Move them to the archive
+            for (Path oldLog : oldLogs) {
+                // Use the same filename, but inside the archive directory
+                Path destination = archiveDir.resolve(oldLog.getFileName());
+                Files.move(oldLog, destination);
+            }
+
+            if (!oldLogs.isEmpty()) {
+                System.out.println("Archived " + oldLogs.size() + " old logs for " + logType);
+            }
+
         } catch (IOException e) {
-            System.err.println("Error creating new log header: " + e.getMessage());
+            System.err.println("Warning: Could not archive old logs: " + e.getMessage());
         }
     }
 
+    /**
+     * REFACTORED: Uses 'Files.newBufferedWriter' for a cleaner try-with-resources block.
+     */
+    private void createNewLogHeader() {
+        String header = "==== Log started at [" + LocalDateTime.now().format(LOG_DATE_FORMAT) + "] ====";
+
+        // Using 'CREATE' and 'APPEND' ensures the file is created if it doesn't exist
+        // and we write to the end of it.
+        try (BufferedWriter writer = Files.newBufferedWriter(logFile,
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            writer.write(header);
+            writer.newLine();
+        } catch (IOException e) {
+            System.err.println("Error creating new log header: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * REFACTORED: Uses 'Files.newBufferedWriter' and modern open options.
+     * This method is synchronized to prevent race conditions from multiple threads
+     * writing to the same log file instance.
+     */
     public synchronized void log(String message) {
         String timestamp = LocalDateTime.now().format(LOG_DATE_FORMAT);
         String logEntry = "[" + timestamp + "] " + message;
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) {
+
+        // Using 'CREATE' (in case header failed) and 'APPEND' is the correct
+        // combination for logging.
+        try (BufferedWriter writer = Files.newBufferedWriter(logFile,
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
             writer.write(logEntry);
             writer.newLine();
         } catch (IOException e) {
             System.err.println("Error writing to log file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -80,44 +151,44 @@ public class LoggerUtil {
     // --- Static utility methods ---
 
     /**
-     * GUI INTEGRATION: Gets all log file names from the "Logs" directory.
+     * REFACTORED: GUI INTEGRATION. Gets all log file names from the "Logs" directory.
+     * Uses 'Files.list()' and filters out the "Archive" directory itself.
      */
     public static List<String> getLogFiles() {
-        File logDir = new File("Logs");
-        if (!logDir.exists() || !logDir.isDirectory()) {
+        Path logDir = Path.of("Logs");
+        if (!Files.isDirectory(logDir)) {
             return Collections.emptyList();
         }
 
-        File[] files = logDir.listFiles((dir, name) -> name.endsWith(".txt"));
-        if (files == null) {
+        try (Stream<Path> stream = Files.list(logDir)) {
+            return stream
+                    .filter(Files::isRegularFile) // Only include files
+                    .filter(path -> path.getFileName().toString().endsWith(".txt")) // Only .txt files
+                    .map(path -> path.getFileName().toString()) // Get just the name
+                    .sorted()
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            System.err.println("Error reading log directory: " + e.getMessage());
             return Collections.emptyList();
         }
-
-        return java.util.Arrays.stream(files)
-                .map(File::getName)
-                .sorted()
-                .collect(Collectors.toList());
     }
 
     /**
-     * GUI INTEGRATION: Reads the entire content of a log file into a String.
+     * REFACTORED: GUI INTEGRATION. Reads the entire content of a log file.
+     * This is now much simpler and more efficient using 'Files.readString'.
      */
     public static String getLogContent(String logName) {
-        File file = new File("Logs", logName);
-        if (!file.exists()) {
+        Path file = Path.of("Logs", logName);
+        if (!Files.exists(file)) {
             return "Error: Log file not found: " + logName;
         }
 
-        StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
+        try {
+            // This one-liner replaces the entire StringBuilder/BufferedReader loop
+            return Files.readString(file);
         } catch (IOException e) {
             return "Error reading log: " + e.getMessage();
         }
-        return content.toString();
     }
 
     // ... viewLog and deleteLogs methods are unchanged but no longer used by the GUI ...
@@ -136,7 +207,7 @@ public class LoggerUtil {
 
     // --- Getters (unchanged) ---
     public String getLogPath() {
-        return logFile.getAbsolutePath();
+        return logFile.toAbsolutePath().toString();
     }
 
     public String getLogType() {

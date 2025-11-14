@@ -1,8 +1,0 @@
-==== Log started at [14/11/25 02:38:35] ====
-[14/11/25 02:38:35] Robot R-009 initialized. Battery: 100%, Status: IDLE
-[14/11/25 02:38:49] Robot thread R-009 started.
-[14/11/25 02:39:22] Robot thread R-009 interrupted and shutting down.
-[14/11/25 02:39:54] Robot thread R-009 started.
-[14/11/25 02:40:47] Robot thread R-009 interrupted and shutting down.
-[14/11/25 02:40:49] Robot thread R-009 started.
-[14/11/25 02:40:54] Robot thread R-009 interrupted and shutting down.

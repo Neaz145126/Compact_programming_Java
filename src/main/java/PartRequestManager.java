@@ -1,9 +1,11 @@
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -13,12 +15,18 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * - Its 'run' method periodically checks the request file for new tasks
  * - It now uses synchronized methods and notifyAll() to implement
  * an instant "Producer" for the "Consumer" (Robot) threads.
+ *
+ * REFACTOR:
+ * - Migrated to 'java.nio.file.Path' for modern file I/O.
+ * - CRITICAL FIX: Removed 'synchronized' from 'loadRequestsFromFile' to
+ * prevent blocking robot and GUI threads during slow file I/O.
+ * - 'loadRequestsFromFile' now acquires the lock *only* after I/O is
+ * complete, just to add tasks and call 'notifyAll()'.
  */
 public class PartRequestManager implements Runnable {
     private final Queue<PartRequest> requestQueue;
     private final Inventory inventory;
-    private static final String REQUEST_FILE = "pending_requests.txt";
-    private final File requestFileHandle;
+    private static final Path REQUEST_FILE_PATH = Path.of("pending_requests.txt");
     private final LoggerUtil logger;
     private volatile boolean simulationIsRunning = true;
     private static final long FILE_POLL_INTERVAL_MS = 5000; // 5 seconds
@@ -27,10 +35,11 @@ public class PartRequestManager implements Runnable {
         this.requestQueue = new ConcurrentLinkedQueue<>();
         this.inventory = inventory;
         this.logger = new LoggerUtil("PartRequestManager");
-        this.requestFileHandle = new File(REQUEST_FILE);
+
         // Create the file if it doesn't exist
         try {
-            if (requestFileHandle.createNewFile()) {
+            if (Files.notExists(REQUEST_FILE_PATH)) {
+                Files.createFile(REQUEST_FILE_PATH);
                 logger.log("Created new empty pending_requests.txt");
             }
         } catch (IOException e) {
@@ -41,11 +50,12 @@ public class PartRequestManager implements Runnable {
 
     /**
      * GUI INTEGRATION: New public method for the GUI to add a task.
-     * This is now synchronized and notifies waiting robots.
+     * This is 'synchronized' to safely coordinate with the 'wait()'
+     * call in the Robot threads.
      */
     public synchronized void addNewRequest(Part part, int quantity) {
         PartRequest newRequest = PartRequest.create(part, quantity);
-        this.requestQueue.add(newRequest);
+        this.requestQueue.add(newRequest); // 'add' is already thread-safe
         logger.log("GUI added new request: " + newRequest);
         // Wake up any and all robot threads that are waiting for a task
         notifyAll();
@@ -66,26 +76,30 @@ public class PartRequestManager implements Runnable {
             } catch (InterruptedException e) {
                 // This is the signal to shut down
                 simulationIsRunning = false;
+                // Preserve the interrupt status for the thread
+                Thread.currentThread().interrupt();
             }
         }
         logger.log("PartRequestManager thread stopped.");
     }
 
     /**
-     * This method is now synchronized.
-     * It also calls notifyAll() if it finds tasks, to wake up robots.
+     * REFACTOR: This method is NO LONGER synchronized.
+     * It does all slow file I/O *before* acquiring a lock.
      */
-    public synchronized void loadRequestsFromFile() throws RequestProcessingException {
-        if (!requestFileHandle.exists()) {
+    public void loadRequestsFromFile() throws RequestProcessingException {
+        if (Files.notExists(REQUEST_FILE_PATH)) {
             return; // File doesn't exist, nothing to do
         }
 
-        boolean requestsFound = false;
-        try (BufferedReader reader = new BufferedReader(new FileReader(requestFileHandle))) {
+        List<PartRequest> newTasks = new ArrayList<>();
+
+        // --- 1. Read file and parse tasks (NO LOCK) ---
+        // This is the slow part that we do outside the lock.
+        try (BufferedReader reader = Files.newBufferedReader(REQUEST_FILE_PATH)) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.isBlank()) continue;
-                requestsFound = true; // Mark that we found something
 
                 String[] parts = line.split(",");
                 if (parts.length != 2) {
@@ -99,31 +113,40 @@ public class PartRequestManager implements Runnable {
 
                 if (part != null) {
                     PartRequest newRequest = PartRequest.create(part, quantity);
-                    this.requestQueue.add(newRequest);
+                    newTasks.add(newRequest); // Add to local temp list
                     logger.log("Read new request from file: " + newRequest);
                 } else {
                     logger.log("Unknown partID from file: " + partID);
                 }
             }
         } catch (IOException | NumberFormatException e) {
-            throw new RequestProcessingException("Error reading request file: " + REQUEST_FILE, e);
+            throw new RequestProcessingException("Error reading request file: " + REQUEST_FILE_PATH, e);
         }
 
-        if (requestsFound) {
-            // Clear the file only after successful processing
-            try (PrintWriter writer = new PrintWriter(new FileWriter(requestFileHandle, false))) {
-                writer.print("");
+        // Only bother to lock and clear if we found new tasks
+        if (!newTasks.isEmpty()) {
+            // --- 2. Clear the file (NO LOCK) ---
+            try {
+                // Overwrite the file with an empty string
+                Files.writeString(REQUEST_FILE_PATH, "", StandardOpenOption.TRUNCATE_EXISTING);
             } catch (IOException e) {
-                throw new RequestProcessingException("Could not clear request file: " + REQUEST_FILE, e);
+                throw new RequestProcessingException("Could not clear request file: " + REQUEST_FILE_PATH, e);
             }
-            // Wake up waiting robots since we added tasks
-            notifyAll();
+
+            // --- 3. Update queue and notify robots (SHORT LOCK) ---
+            // This is the *only* part that needs to be synchronized.
+            // It's fast and doesn't do I/O.
+            synchronized (this) {
+                this.requestQueue.addAll(newTasks);
+                // Wake up waiting robots since we added tasks
+                notifyAll();
+            }
         }
     }
 
     /**
-     * This method is now synchronized.
-     * Only one robot can check the queue at a time.
+     * This method is 'synchronized' to safely coordinate with
+     * the 'wait()' call in the Robot threads.
      */
     public synchronized PartRequest getNextRequest() {
         return this.requestQueue.poll();

@@ -1,3 +1,0 @@
-==== Log started at [14/11/25 03:09:57] ====
-[14/11/25 03:09:57] Charging station CS-E initialized and ready.
-[14/11/25 03:09:57] Station thread CS-E started. Waiting for robots.

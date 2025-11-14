@@ -1,5 +1,0 @@
-==== Log started at [14/11/25 04:02:01] ====
-[14/11/25 04:02:01] PartRequestManager initialized.
-[14/11/25 04:02:01] PartRequestManager thread started. Polling file every 5000ms.
-[14/11/25 04:02:28] GUI added new request: PartRequest[requestID=Task-1, items={Part[partID=P1002, name=Air Filter, description=Engine air filter]=8, Part[partID=P1001, name=Oil Filter, description=Standard oil filter]=4, Part[partID=P1004, name=Brake Pad, description=Front ceramic pads]=10}, status=PENDING]
-[14/11/25 04:03:16] GUI added new request: PartRequest[requestID=Task-2, items={Part[partID=P1005, name=Brake Disc, description=Vented front brake disc]=7, Part[partID=P1001, name=Oil Filter, description=Standard oil filter]=6, Part[partID=P1004, name=Brake Pad, description=Front ceramic pads]=3}, status=PENDING]

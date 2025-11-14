@@ -1,5 +1,7 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.Comparator;
@@ -12,7 +14,11 @@ import java.util.Vector;
  * It provides a Swing interface to start/stop the simulation,
  * add tasks, and monitor robots, inventory, and logs in real-time.
  *
- * UPDATE: Includes a new panel to monitor Charging Stations.
+ * REFACTOR:
+ * 1. Added JSpinners to control robot/station count.
+ * 2. Added custom TableCellRenderers for battery bars and status colors.
+ * 3. Moved log file I/O (refreshing list, loading content) to background
+ * threads using SwingWorker to prevent UI freezes.
  */
 public class WarehouseSystemGUI extends JFrame {
 
@@ -30,13 +36,17 @@ public class WarehouseSystemGUI extends JFrame {
     private final JTextArea logTextArea;
     private final JButton refreshLogButton;
 
+    // --- NEW: Simulation config spinners ---
+    private final JSpinner robotCountSpinner;
+    private final JSpinner stationCountSpinner;
+
     // --- Table Models ---
     private final DefaultTableModel robotTableModel;
     private final DefaultTableModel inventoryTableModel;
-    private final DefaultTableModel stationTableModel; // <-- NEW
+    private final DefaultTableModel stationTableModel;
     private final JTable robotTable;
     private final JTable inventoryTable;
-    private final JTable stationTable; // <-- NEW
+    private final JTable stationTable;
 
     // --- UI Update Timer ---
     private final Timer updateTimer;
@@ -44,7 +54,7 @@ public class WarehouseSystemGUI extends JFrame {
     // --- Column Names ---
     private final String[] robotColumnNames = {"Robot ID", "Status", "Task ID", "Battery"};
     private final String[] inventoryColumnNames = {"Part ID", "Part Name", "Stock"};
-    private final String[] stationColumnNames = {"Station ID", "Status", "Charging Robot"}; // <-- NEW
+    private final String[] stationColumnNames = {"Station ID", "Status", "Charging Robot"};
 
     /**
      * This is the single, correct constructor.
@@ -52,7 +62,7 @@ public class WarehouseSystemGUI extends JFrame {
      */
     public WarehouseSystemGUI() {
         setTitle("Warehouse Control System");
-        setSize(1200, 800); // Made window wider
+        setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
@@ -67,7 +77,6 @@ public class WarehouseSystemGUI extends JFrame {
         };
         inventoryTable = new JTable(inventoryTableModel);
 
-        // --- NEW: Station Table Model ---
         stationTableModel = new DefaultTableModel(stationColumnNames, 0) {
             @Override public boolean isCellEditable(int row, int column) { return false; }
         };
@@ -82,6 +91,10 @@ public class WarehouseSystemGUI extends JFrame {
         logFileComboBox = new JComboBox<>();
         logTextArea = new JTextArea();
         refreshLogButton = new JButton("Refresh Log");
+
+        // --- NEW: Init config spinners ---
+        robotCountSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1)); // Default 10
+        stationCountSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1)); // Default 5
 
         // --- Build Panels ---
         JPanel controlPanel = initControlPanel();
@@ -102,12 +115,23 @@ public class WarehouseSystemGUI extends JFrame {
     }
 
     /**
-     * Top panel with Start/Stop buttons.
+     * Top panel with Start/Stop buttons and config.
      */
     private JPanel initControlPanel() {
-        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        controlPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        // --- NEW: Add config spinners ---
+        controlPanel.add(new JLabel("Robots:"));
+        controlPanel.add(robotCountSpinner);
+        controlPanel.add(new JLabel("Stations:"));
+        controlPanel.add(stationCountSpinner);
+
+        controlPanel.add(Box.createHorizontalStrut(20)); // Spacer
+
         controlPanel.add(startButton);
         controlPanel.add(stopButton);
+
         startButton.addActionListener(e -> startSimulation());
         stopButton.addActionListener(e -> stopSimulation());
         return controlPanel;
@@ -123,9 +147,13 @@ public class WarehouseSystemGUI extends JFrame {
 
         // --- Robot Panel ---
         statusPanel.add(new JLabel("Robot Status (Live)"));
-        statusPanel.add(initTablePanel(robotTable, new int[]{80, 120, 80, 60}));
+        statusPanel.add(initTablePanel(robotTable, new int[]{80, 120, 80, 100}));
 
-        // --- NEW: Station Panel ---
+        // --- NEW: Apply custom renderers ---
+        robotTable.getColumnModel().getColumn(1).setCellRenderer(new StatusColorRenderer());
+        robotTable.getColumnModel().getColumn(3).setCellRenderer(new BatteryCellRenderer());
+
+        // --- Station Panel ---
         statusPanel.add(Box.createVerticalStrut(10));
         statusPanel.add(new JLabel("Charging Station Status (Live)"));
         statusPanel.add(initTablePanel(stationTable, new int[]{80, 100, 120}));
@@ -145,6 +173,7 @@ public class WarehouseSystemGUI extends JFrame {
         table.setFillsViewportHeight(true);
         table.setFont(new Font("Monospaced", Font.PLAIN, 12));
         table.getTableHeader().setFont(new Font("Monospaced", Font.BOLD, 12));
+        table.setRowHeight(20); // Give progress bars room
 
         TableColumnModel columnModel = table.getColumnModel();
         for (int i = 0; i < widths.length; i++) {
@@ -210,7 +239,17 @@ public class WarehouseSystemGUI extends JFrame {
         logViewerPanel.add(logControlPanel, BorderLayout.NORTH);
         logViewerPanel.add(logScrollPane, BorderLayout.CENTER);
 
-        refreshLogButton.addActionListener(e -> loadSelectedLog());
+        // --- REFACTOR: Use new background-threaded methods ---
+        refreshLogButton.addActionListener(e -> refreshLogFileList());
+        logFileComboBox.addActionListener(e -> {
+            // Only fire when the user makes a selection
+            if (e.getActionCommand().equals("comboBoxChanged")) {
+                loadSelectedLog();
+            }
+        });
+
+        // Load the initial list
+        refreshLogFileList();
 
         // Add sub-panels to main side panel
         sidePanel.add(addTaskPanel);
@@ -223,7 +262,11 @@ public class WarehouseSystemGUI extends JFrame {
     // --- Simulation Control ---
 
     private void startSimulation() {
-        warehouse = new Warehouse(10, 5); // 10 Robots, 5 Stations
+        // --- NEW: Read from spinners ---
+        int robotCount = (int) robotCountSpinner.getValue();
+        int stationCount = (int) stationCountSpinner.getValue();
+
+        warehouse = new Warehouse(robotCount, stationCount);
 
         simulationWorker = new SwingWorker<Void, Void>() {
             @Override
@@ -233,36 +276,46 @@ public class WarehouseSystemGUI extends JFrame {
             }
             @Override
             protected void done() {
+                // This 'done' block runs on the EDT
+                // If the simulation stops (or crashes), reset the UI
                 stopSimulation();
             }
         };
         simulationWorker.execute();
 
+        // Disable controls
         startButton.setEnabled(false);
         stopButton.setEnabled(true);
         addTaskButton.setEnabled(true);
+        robotCountSpinner.setEnabled(false);
+        stationCountSpinner.setEnabled(false);
 
         refreshLogFileList();
         updateTimer.start();
-        System.out.println("Simulation started.");
+        System.out.println("Simulation started with " + robotCount + " robots and " + stationCount + " stations.");
     }
 
     private void stopSimulation() {
         if (warehouse != null) {
             warehouse.stopSimulation();
         }
-        if (simulationWorker != null) {
+        if (simulationWorker != null && !simulationWorker.isDone()) {
             simulationWorker.cancel(true);
         }
 
+        // Enable controls
         startButton.setEnabled(true);
         stopButton.setEnabled(false);
         addTaskButton.setEnabled(false);
+        robotCountSpinner.setEnabled(true);
+        stationCountSpinner.setEnabled(true);
 
         if (updateTimer.isRunning()) {
             updateTimer.stop();
         }
         System.out.println("Simulation stopped.");
+        // We run one final update to get the last state
+        updateStatusPanels();
     }
 
     // --- UI Update Methods ---
@@ -278,14 +331,14 @@ public class WarehouseSystemGUI extends JFrame {
                 .forEach(robot -> {
                     Vector<Object> row = new Vector<>();
                     row.add(robot.getRobotID());
-                    row.add(robot.getStatus());
+                    row.add(robot.getStatus()); // Will be rendered by StatusColorRenderer
                     PartRequest task = robot.getCurrentTask();
                     row.add((task == null) ? "---" : task.requestID());
-                    row.add(robot.getBatteryLevel() + "%");
+                    row.add(robot.getBatteryLevel()); // Will be rendered by BatteryCellRenderer
                     robotTableModel.addRow(row);
                 });
 
-        // --- NEW: Update Station Table ---
+        // --- Update Station Table ---
         stationTableModel.setRowCount(0);
         List<ChargingStation> stations = warehouse.getStations();
         stations.stream()
@@ -332,31 +385,81 @@ public class WarehouseSystemGUI extends JFrame {
         }
     }
 
+    /**
+     * REFACTOR: Runs file I/O on a background thread.
+     */
     private void refreshLogFileList() {
-        logFileComboBox.removeAllItems();
-        try {
-            List<String> logFiles = LoggerUtil.getLogFiles();
-            for (String logFile : logFiles) {
-                logFileComboBox.addItem(logFile);
+        // Disable controls
+        refreshLogButton.setEnabled(false);
+        logFileComboBox.setEnabled(false);
+        logTextArea.setText("Refreshing log file list...");
+
+        SwingWorker<List<String>, Void> worker = new SwingWorker<List<String>, Void>() {
+            @Override
+            protected List<String> doInBackground() throws Exception {
+                // This runs on a worker thread
+                return LoggerUtil.getLogFiles();
             }
-        } catch (Exception e) {
-            logTextArea.setText("Error reading log directory: \n" + e.getMessage());
-        }
+
+            @Override
+            protected void done() {
+                // This runs back on the EDT
+                try {
+                    List<String> logFiles = get(); // Get the result from doInBackground
+                    logFileComboBox.removeAllItems();
+                    for (String logFile : logFiles) {
+                        logFileComboBox.addItem(logFile);
+                    }
+                    logTextArea.setText("Log list refreshed. Select a file to view.");
+                } catch (Exception e) {
+                    logTextArea.setText("Error reading log directory: \n" + e.getMessage());
+                }
+                // Re-enable controls
+                refreshLogButton.setEnabled(true);
+                logFileComboBox.setEnabled(true);
+            }
+        };
+        worker.execute();
     }
 
+    /**
+     * REFACTOR: Runs file I/O on a background thread.
+     */
     private void loadSelectedLog() {
         String selectedFile = (String) logFileComboBox.getSelectedItem();
         if (selectedFile == null) {
             logTextArea.setText("No log file selected.");
             return;
         }
-        try {
-            String content = LoggerUtil.getLogContent(selectedFile);
-            logTextArea.setText(content);
-            logTextArea.setCaretPosition(0); // Scroll to top
-        } catch (Exception e) {
-            logTextArea.setText("Error reading log file: \n" + e.getMessage());
-        }
+
+        // Disable controls
+        refreshLogButton.setEnabled(false);
+        logFileComboBox.setEnabled(false);
+        logTextArea.setText("Loading " + selectedFile + "...");
+
+        SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
+            @Override
+            protected String doInBackground() throws Exception {
+                // This runs on a worker thread
+                return LoggerUtil.getLogContent(selectedFile);
+            }
+
+            @Override
+            protected void done() {
+                // This runs back on the EDT
+                try {
+                    String content = get();
+                    logTextArea.setText(content);
+                    logTextArea.setCaretPosition(0); // Scroll to top
+                } catch (Exception e) {
+                    logTextArea.setText("Error reading log file: \n" + e.getMessage());
+                }
+                // Re-enable controls
+                refreshLogButton.setEnabled(true);
+                logFileComboBox.setEnabled(true);
+            }
+        };
+        worker.execute();
     }
 
 
@@ -367,5 +470,83 @@ public class WarehouseSystemGUI extends JFrame {
             WarehouseSystemGUI gui = new WarehouseSystemGUI();
             gui.setVisible(true);
         });
+    }
+
+    // --- NEW: Custom Inner Class for Battery Bar Renderer ---
+
+    /**
+     * This custom renderer draws a JProgressBar in the battery column.
+     */
+    class BatteryCellRenderer extends JProgressBar implements TableCellRenderer {
+
+        public BatteryCellRenderer() {
+            super(0, 100); // Min 0, Max 100
+            setStringPainted(true);
+            setFont(new Font("Monospaced", Font.PLAIN, 12));
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
+            // 'value' is the Integer battery level
+            int batteryLevel = (Integer) value;
+            setValue(batteryLevel);
+
+            // Set the color of the bar
+            if (batteryLevel < Robot.LOW_BATTERY_THRESHOLD) {
+                setForeground(Color.RED);
+            } else {
+                setForeground(new Color(0, 128, 0)); // Dark Green
+            }
+
+            return this;
+        }
+    }
+
+    // --- NEW: Custom Inner Class for Status Color Renderer ---
+
+    /**
+     * This custom renderer colors the background of the "Status" cell.
+     */
+    class StatusColorRenderer extends DefaultTableCellRenderer {
+
+        // Pre-defined colors for efficiency
+        private final Color COLOR_CHARGING = new Color(144, 238, 144); // Light Green
+        private final Color COLOR_LOW_BATTERY = new Color(255, 210, 120); // Light Orange
+        private final Color COLOR_WORKING = new Color(173, 216, 230); // Light Blue
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
+            // Get the default component (a JLabel)
+            Component c = super.getTableCellRendererComponent(table, value,
+                    isSelected, hasFocus,
+                    row, column);
+
+            RobotStatus status = (RobotStatus) value;
+
+            if (!isSelected) {
+                // Set background color based on status
+                switch (status) {
+                    case CHARGING:
+                        c.setBackground(COLOR_CHARGING);
+                        break;
+                    case LOW_BATTERY:
+                    case WAITING_FOR_CHARGE:
+                        c.setBackground(COLOR_LOW_BATTERY);
+                        break;
+                    case WORKING:
+                        c.setBackground(COLOR_WORKING);
+                        break;
+                    case IDLE:
+                    default:
+                        c.setBackground(table.getBackground());
+                }
+            }
+
+            return c;
+        }
     }
 }

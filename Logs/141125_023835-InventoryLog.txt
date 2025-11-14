@@ -1,5 +1,0 @@
-==== Log started at [14/11/25 02:38:35] ====
-[14/11/25 02:38:35] Inventory initialized. Total stock: 135 / 500
-[14/11/25 02:39:55] Removed 10 units of Air Filter. Remaining: 20
-[14/11/25 02:40:04] Error: Not enough stock of Brake Pad. Requested: 10, Available: 0
-[14/11/25 02:40:10] Error: Not enough stock of Headlight Bulb. Requested: 10, Available: 0

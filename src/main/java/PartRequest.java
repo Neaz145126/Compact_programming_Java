@@ -1,10 +1,5 @@
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * A data record for a PartRequest.
- * CONCURRENCY: This is now thread-safe using AtomicLong
- * for the request counter.
- */
 public record PartRequest(
         String requestID,
         Part part,

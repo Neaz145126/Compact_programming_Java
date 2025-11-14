@@ -1,4 +1,0 @@
-==== Log started at [14/11/25 03:06:46] ====
-[14/11/25 03:06:46] Inventory initialized. Total stock: 135 / 500
-[14/11/25 03:06:55] Removed 4 units of Oil Filter. Remaining: 21
-[14/11/25 03:07:03] Removed 4 units of Oil Filter. Remaining: 17

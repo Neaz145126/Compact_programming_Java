@@ -1,4 +1,0 @@
-==== Log started at [14/11/25 03:15:42] ====
-[14/11/25 03:15:42] Inventory initialized. Total stock: 135 / 500
-[14/11/25 03:15:50] Error: Not enough stock of Taillight Bulb. Requested: 1, Available: 0
-[14/11/25 03:15:58] Removed 1 units of Spark Plug. Remaining: 49

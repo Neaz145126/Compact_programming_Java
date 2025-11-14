@@ -1,2 +1,0 @@
-==== Log started at [14/11/25 02:46:12] ====
-[14/11/25 02:46:12] Warehouse WH-01 (Main GUI Warehouse) initialized with 10 robots and 4 stations.
