@@ -1,0 +1,2 @@
+==== Log started at [13/11/25 23:37:35] ====
+[13/11/25 23:37:35] Charging station CS-C initialized and ready.
