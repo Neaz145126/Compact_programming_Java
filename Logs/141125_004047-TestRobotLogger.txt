@@ -1,0 +1,11 @@
+==== Log started at [14/11/25 00:40:47] ====
+[14/11/25 00:40:47] Robot R-TEST initialized. Battery: 100%, Status: IDLE
+[14/11/25 00:40:47] Robot R-TEST assigned to task Task-5 (Test Part)
+[14/11/25 00:40:47] Robot R-TEST is performing task Task-5 for part Test Part
+[14/11/25 00:40:47] Robot R-TEST finished task. Battery now: 60%
+[14/11/25 00:40:47] Robot R-TEST is now IDLE. Battery: 60%
+[14/11/25 00:40:47] Robot R-TEST assigned to task Task-5 (Test Part)
+[14/11/25 00:40:47] Robot R-TEST is performing task Task-5 for part Test Part
+[14/11/25 00:40:47] Robot R-TEST finished task. Battery now: 20%
+[14/11/25 00:40:47] Robot R-TEST is now IDLE. Battery: 20%
+[14/11/25 00:40:47] Robot R-TEST has low battery (20%). Needs charging.

@@ -1,0 +1,3 @@
+==== Log started at [14/11/25 00:41:58] ====
+[14/11/25 00:41:58] Inventory initialized. Total stock: 55 / 500
+[14/11/25 00:41:58] Part not found with ID: P-INVALID

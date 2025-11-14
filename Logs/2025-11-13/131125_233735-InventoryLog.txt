@@ -1,0 +1,36 @@
+==== Log started at [13/11/25 23:37:35] ====
+[13/11/25 23:37:35] Inventory initialized. Total stock: 105 / 500
+[13/11/25 23:37:35] ========== INVENTORY REPORT ==========
+[13/11/25 23:37:35] Capacity: 105 / 500
+[13/11/25 23:37:35] - Air Filter           (ID: P1002): 30 units
+[13/11/25 23:37:35] - Oil Filter           (ID: P1001): 25 units
+[13/11/25 23:37:35] - Spark Plug           (ID: P1003): 50 units
+[13/11/25 23:37:35] =====================================
+[13/11/25 23:37:35] Part found: Oil Filter (ID: P1001)
+[13/11/25 23:37:35] Part found: Air Filter (ID: P1002)
+[13/11/25 23:37:35] Part found: Spark Plug (ID: P1003)
+[13/11/25 23:37:35] Part not found with ID: P1015
+[13/11/25 23:37:35] Removed 5 units of Oil Filter. Remaining: 20
+[13/11/25 23:37:35] Removed 10 units of Air Filter. Remaining: 20
+[13/11/25 23:37:35] Removed 15 units of Spark Plug. Remaining: 35
+[13/11/25 23:37:35] Part found: Spark Plug (ID: P1003)
+[13/11/25 23:37:35] Part not found with ID: P1018
+[13/11/25 23:37:35] Removed 2 units of Spark Plug. Remaining: 33
+[13/11/25 23:37:35] Part found: Spark Plug (ID: P1003)
+[13/11/25 23:37:35] Part not found with ID: P1018
+[13/11/25 23:37:35] Removed 2 units of Spark Plug. Remaining: 31
+[13/11/25 23:37:35] Part found: Spark Plug (ID: P1003)
+[13/11/25 23:37:35] Part not found with ID: P1018
+[13/11/25 23:37:35] Removed 2 units of Spark Plug. Remaining: 29
+[13/11/25 23:37:35] Part found: Spark Plug (ID: P1003)
+[13/11/25 23:37:35] Part not found with ID: P1018
+[13/11/25 23:37:35] Removed 2 units of Spark Plug. Remaining: 27
+[13/11/25 23:37:35] Part found: Spark Plug (ID: P1003)
+[13/11/25 23:37:35] Part not found with ID: P1018
+[13/11/25 23:37:35] Removed 2 units of Spark Plug. Remaining: 25
+[13/11/25 23:37:35] ========== INVENTORY REPORT ==========
+[13/11/25 23:37:35] Capacity: 65 / 500
+[13/11/25 23:37:35] - Air Filter           (ID: P1002): 20 units
+[13/11/25 23:37:35] - Oil Filter           (ID: P1001): 20 units
+[13/11/25 23:37:35] - Spark Plug           (ID: P1003): 25 units
+[13/11/25 23:37:35] =====================================
