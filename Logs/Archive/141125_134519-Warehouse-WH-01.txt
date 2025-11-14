@@ -1,0 +1,11 @@
+==== Log started at [14/11/25 13:45:19] ====
+[14/11/25 13:45:19] Created 10 robots.
+[14/11/25 13:45:19] Created 2 charging stations.
+[14/11/25 13:45:19] Warehouse WH-01 (Main Warehouse) initialized with 10 robots and 2 stations.
+[14/11/25 13:45:19] === STARTING WAREHOUSE SIMULATION (Pool size: 13) ===
+[14/11/25 13:45:56] GUI requested simulation stop.
+[14/11/25 13:45:56] Executor shutdown requested.
+[14/11/25 13:45:56] Simulation main loop interrupted. Shutting down.
+[14/11/25 13:45:56] === WAREHOUSE SIMULATION STOPPED ===
+[14/11/25 13:45:56] Writing final binary report to C:\Users\neaz\Desktop\Compact_programming_Java\completed_report.dat...
+[14/11/25 13:45:56] Final report written successfully. Total requests: 16

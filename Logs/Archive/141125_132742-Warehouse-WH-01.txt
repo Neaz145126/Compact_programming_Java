@@ -1,0 +1,10 @@
+==== Log started at [14/11/25 13:27:42] ====
+[14/11/25 13:27:42] Created 10 robots.
+[14/11/25 13:27:42] Created 2 charging stations.
+[14/11/25 13:27:42] Warehouse WH-01 (Main Warehouse) initialized with 10 robots and 2 stations.
+[14/11/25 13:27:42] === STARTING WAREHOUSE SIMULATION ===
+[14/11/25 13:27:52] GUI requested simulation stop.
+[14/11/25 13:27:52] Simulation main loop interrupted. Shutting down.
+[14/11/25 13:27:52] === WAREHOUSE SIMULATION STOPPED ===
+[14/11/25 13:27:52] Writing final binary report to completed_report.dat...
+[14/11/25 13:27:52] Final report written successfully. Total requests: 5

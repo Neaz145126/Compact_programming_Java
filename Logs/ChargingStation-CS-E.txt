@@ -1,0 +1,2 @@
+==== New simulation log started at [14/11/25 14:09:47] ====
+[14/11/25 14:09:47] Charging station CS-E initialized and ready.

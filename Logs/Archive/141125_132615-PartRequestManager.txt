@@ -1,0 +1,13 @@
+==== Log started at [14/11/25 13:26:15] ====
+[14/11/25 13:26:15] PartRequestManager initialized.
+[14/11/25 13:26:15] PartRequestManager thread started. Polling file every 5000ms.
+[14/11/25 13:26:18] GUI added new request: PartRequest[requestID=Task-1, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:20] GUI added new request: PartRequest[requestID=Task-2, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:21] GUI added new request: PartRequest[requestID=Task-3, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:23] GUI added new request: PartRequest[requestID=Task-4, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:25] GUI added new request: PartRequest[requestID=Task-5, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:29] GUI added new request: PartRequest[requestID=Task-6, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:31] GUI added new request: PartRequest[requestID=Task-7, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:33] GUI added new request: PartRequest[requestID=Task-8, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:35] GUI added new request: PartRequest[requestID=Task-9, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=1, status=PENDING]
+[14/11/25 13:26:47] PartRequestManager thread stopped.

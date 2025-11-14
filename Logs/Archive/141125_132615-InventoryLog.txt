@@ -1,0 +1,25 @@
+==== Log started at [14/11/25 13:26:15] ====
+[14/11/25 13:26:15] Inventory initialized. Total stock: 340 / 500
+[14/11/25 13:26:15] Created fast lookup map with 10 parts.
+[14/11/25 13:26:18] Removed 1 units of Air Filter. Remaining: 29
+[14/11/25 13:26:20] Removed 1 units of Air Filter. Remaining: 28
+[14/11/25 13:26:21] Removed 1 units of Air Filter. Remaining: 27
+[14/11/25 13:26:23] Removed 1 units of Air Filter. Remaining: 26
+[14/11/25 13:26:25] Removed 1 units of Air Filter. Remaining: 25
+[14/11/25 13:26:29] Removed 1 units of Air Filter. Remaining: 24
+[14/11/25 13:26:31] Removed 1 units of Air Filter. Remaining: 23
+[14/11/25 13:26:33] Removed 1 units of Air Filter. Remaining: 22
+[14/11/25 13:26:35] Removed 1 units of Air Filter. Remaining: 21
+[14/11/25 13:26:47] ========== INVENTORY REPORT ==========
+[14/11/25 13:26:47] Capacity: 331 / 500
+[14/11/25 13:26:47] - Oil Filter           (ID: P1001): 25 units
+[14/11/25 13:26:47] - Air Filter           (ID: P1002): 21 units
+[14/11/25 13:26:47] - Spark Plug           (ID: P1003): 50 units
+[14/11/25 13:26:47] - Brake Pad            (ID: P1004): 20 units
+[14/11/25 13:26:47] - Brake Disc           (ID: P1005): 50 units
+[14/11/25 13:26:47] - Wiper Blade          (ID: P1006): 25 units
+[14/11/25 13:26:47] - Headlight Bulb       (ID: P1007): 30 units
+[14/11/25 13:26:47] - Battery              (ID: P1009): 20 units
+[14/11/25 13:26:47] - Alternator           (ID: P1010): 40 units
+[14/11/25 13:26:47] - Taillight Bulb       (ID: P1A008): 50 units
+[14/11/25 13:26:47] =====================================
