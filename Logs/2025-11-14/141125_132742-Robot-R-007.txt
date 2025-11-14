@@ -1,5 +1,0 @@
-==== Log started at [14/11/25 13:27:42] ====
-==== Log started at [14/11/25 13:27:42] ====
-[14/11/25 13:27:42] Robot R-007 initialized. Battery: 100%
-[14/11/25 13:27:42] Robot R-007 thread started.
-[14/11/25 13:27:52] Robot R-007 thread stopped. Final status: IDLE

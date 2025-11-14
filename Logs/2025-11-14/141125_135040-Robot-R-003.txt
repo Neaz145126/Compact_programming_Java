@@ -1,8 +1,0 @@
-==== Log started at [14/11/25 13:50:40] ====
-[14/11/25 13:50:40] Robot R-003 initialized. Battery: 100%
-[14/11/25 13:50:40] Robot R-003 thread started.
-[14/11/25 13:50:49] Found task Task-3. Attempting to get stock.
-[14/11/25 13:50:49] Stock secured. Starting work on task Task-3
-[14/11/25 13:50:49] Performing task Task-3...
-[14/11/25 13:50:59] Task Task-3 complete. Battery: 52%
-[14/11/25 13:52:18] Robot R-003 thread stopped. Final status: IDLE

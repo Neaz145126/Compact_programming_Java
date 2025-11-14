@@ -1,5 +1,0 @@
-==== Log started at [14/11/25 13:43:38] ====
-[14/11/25 13:43:38] Created 4 robots.
-[14/11/25 13:43:38] Created 1 charging stations.
-[14/11/25 13:43:38] Warehouse WH-01 (Main Warehouse) initialized with 4 robots and 1 stations.
-[14/11/25 13:43:38] === STARTING WAREHOUSE SIMULATION (Pool size: 6) ===

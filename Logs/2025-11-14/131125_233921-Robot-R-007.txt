@@ -1,2 +1,0 @@
-==== Log started at [13/11/25 23:39:21] ====
-[13/11/25 23:39:21] Robot R-007 initialized. Battery: 100%, Status: IDLE
