@@ -1,0 +1,25 @@
+==== Log started at [13/11/25 23:39:21] ====
+[13/11/25 23:39:21] Robot R-001 initialized. Battery: 100%, Status: IDLE
+[13/11/25 23:39:21] Robot R-001 assigned to task Task-3 (Spark Plug)
+[13/11/25 23:39:21] Robot R-001 is performing task Task-3 for part Spark Plug
+[13/11/25 23:39:21] Robot R-001 finished task. Battery now: 60%
+[13/11/25 23:39:21] Robot R-001 is now IDLE. Battery: 60%
+[13/11/25 23:39:21] Robot R-001 assigned to task Task-4 (Spark Plug)
+[13/11/25 23:39:21] Robot R-001 is performing task Task-4 for part Spark Plug
+[13/11/25 23:39:21] Robot R-001 finished task. Battery now: 20%
+[13/11/25 23:39:21] Robot R-001 is now IDLE. Battery: 20%
+[13/11/25 23:39:21] Robot R-001 has low battery (20%). Needs charging.
+[13/11/25 23:39:21] Robot R-001 is moving to charging station.
+[13/11/25 23:39:21] Robot R-001 is charging... (30%)
+[13/11/25 23:39:21] Robot R-001 is charging... (40%)
+[13/11/25 23:39:21] Robot R-001 is charging... (50%)
+[13/11/25 23:39:21] Robot R-001 is charging... (60%)
+[13/11/25 23:39:21] Robot R-001 is charging... (70%)
+[13/11/25 23:39:21] Robot R-001 is charging... (80%)
+[13/11/25 23:39:21] Robot R-001 is charging... (90%)
+[13/11/25 23:39:21] Robot R-001 is fully charged.
+[13/11/25 23:39:21] Robot R-001 is now IDLE. Battery: 100%
+[13/11/25 23:39:21] Robot R-001 assigned to task Task-7 (Spark Plug)
+[13/11/25 23:39:21] Robot R-001 is performing task Task-7 for part Spark Plug
+[13/11/25 23:39:21] Robot R-001 finished task. Battery now: 60%
+[13/11/25 23:39:21] Robot R-001 is now IDLE. Battery: 60%

@@ -1,0 +1,36 @@
+==== Log started at [13/11/25 23:37:35] ====
+[13/11/25 23:37:35] Created 11 robots, each with its own logger.
+[13/11/25 23:37:35] Created 5 charging stations.
+[13/11/25 23:37:35] Warehouse WH-01 (Main Warehouse) initialized with 11 robots and 5 stations.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Warehouse WH-01 updated all components.
+[13/11/25 23:37:35] Writing final binary report to completed_report.dat...
+[13/11/25 23:37:35] Final report written successfully. Total requests: 8

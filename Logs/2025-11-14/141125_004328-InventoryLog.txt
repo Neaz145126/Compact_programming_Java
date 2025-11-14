@@ -1,0 +1,3 @@
+==== Log started at [14/11/25 00:43:28] ====
+[14/11/25 00:43:28] Inventory initialized. Total stock: 10 / 100
+[14/11/25 00:43:28] Removed 5 units of Oil Filter. Remaining: 5
