@@ -1,0 +1,10 @@
+==== Log started at [14/11/25 03:03:54] ====
+[14/11/25 03:03:54] Inventory initialized. Total stock: 135 / 500
+[14/11/25 03:03:54] ========== INVENTORY REPORT ==========
+[14/11/25 03:03:54] Capacity: 135 / 500
+[14/11/25 03:03:54] - Air Filter           (ID: P1002): 30 units
+[14/11/25 03:03:54] - Oil Filter           (ID: P1001): 25 units
+[14/11/25 03:03:54] - Spark Plug           (ID: P1003): 50 units
+[14/11/25 03:03:54] - Tire                 (ID: P1015): 20 units
+[14/11/25 03:03:54] - Exhaust Muffler      (ID: P1018): 10 units
+[14/11/25 03:03:54] =====================================

@@ -1,0 +1,12 @@
+==== Log started at [14/11/25 03:03:53] ====
+[14/11/25 03:03:53] PartRequestManager initialized.
+[14/11/25 03:03:53] PartRequestManager thread started. Polling file every 5000ms.
+[14/11/25 03:03:53] PartRequestManager thread stopped.
+==== Log started at [14/11/25 03:03:53] ====
+[14/11/25 03:03:53] PartRequestManager initialized.
+[14/11/25 03:03:53] PartRequestManager thread started. Polling file every 5000ms.
+[14/11/25 03:03:53] PartRequestManager thread stopped.
+==== Log started at [14/11/25 03:03:53] ====
+[14/11/25 03:03:53] PartRequestManager initialized.
+[14/11/25 03:03:53] PartRequestManager thread started. Polling file every 5000ms.
+[14/11/25 03:03:53] PartRequestManager thread stopped.

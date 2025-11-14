@@ -1,0 +1,16 @@
+==== Log started at [14/11/25 02:46:32] ====
+[14/11/25 02:46:32] Robot R-005 initialized. Battery: 100%, Status: IDLE
+[14/11/25 02:47:05] Robot thread R-005 started.
+[14/11/25 02:48:26] Robot R-005 found task Task-12. Attempting to get stock.
+[14/11/25 02:48:26] Robot R-005 - Received task Task-12
+[14/11/25 02:48:26] Robot R-005 starting work on task Task-12
+[14/11/25 02:48:29] Robot R-005 finished task Task-12. Battery now: 51%
+[14/11/25 02:48:30] Robot R-005 found task Task-14. Attempting to get stock.
+[14/11/25 02:48:30] Robot R-005 FAILED task Task-14. Reason: Not enough stock of Air Filter. Requested: 8, Available: 6
+[14/11/25 02:48:40] Robot R-005 found task Task-16. Attempting to get stock.
+[14/11/25 02:48:40] Robot R-005 - Received task Task-16
+[14/11/25 02:48:40] Robot R-005 starting work on task Task-16
+[14/11/25 02:48:43] Robot R-005 finished task Task-16. Battery now: 6%
+[14/11/25 02:48:43] Robot R-005 has low battery (6%). Needs charging.
+[14/11/25 02:48:43] Robot R-005 is requesting a charging station.
+[14/11/25 02:48:43] Robot R-005 is in the queue, waiting for a station.

@@ -1,0 +1,28 @@
+==== Log started at [14/11/25 03:03:52] ====
+[14/11/25 03:03:52] Warehouse WH-01 (Main Warehouse) initialized with 10 robots and 5 stations.
+[14/11/25 03:03:52] === STARTING WAREHOUSE SIMULATION ===
+[14/11/25 03:03:52] GUI requested simulation stop.
+[14/11/25 03:03:52] === WAREHOUSE SIMULATION STOPPED ===
+[14/11/25 03:03:52] Writing final binary report to completed_report.dat...
+[14/11/25 03:03:52] Final report written successfully. Total requests: 0
+==== Log started at [14/11/25 03:03:52] ====
+[14/11/25 03:03:52] Warehouse WH-01 (Main Warehouse) initialized with 10 robots and 5 stations.
+[14/11/25 03:03:52] === STARTING WAREHOUSE SIMULATION ===
+[14/11/25 03:03:52] GUI requested simulation stop.
+[14/11/25 03:03:52] === WAREHOUSE SIMULATION STOPPED ===
+[14/11/25 03:03:52] Writing final binary report to completed_report.dat...
+[14/11/25 03:03:52] Final report written successfully. Total requests: 0
+==== Log started at [14/11/25 03:03:52] ====
+[14/11/25 03:03:52] Warehouse WH-01 (Main Warehouse) initialized with 10 robots and 5 stations.
+[14/11/25 03:03:52] === STARTING WAREHOUSE SIMULATION ===
+[14/11/25 03:03:52] GUI requested simulation stop.
+[14/11/25 03:03:52] === WAREHOUSE SIMULATION STOPPED ===
+[14/11/25 03:03:52] Writing final binary report to completed_report.dat...
+[14/11/25 03:03:52] Final report written successfully. Total requests: 0
+==== Log started at [14/11/25 03:03:52] ====
+[14/11/25 03:03:52] Warehouse WH-01 (Main Warehouse) initialized with 10 robots and 5 stations.
+[14/11/25 03:03:52] === STARTING WAREHOUSE SIMULATION ===
+[14/11/25 03:03:52] GUI requested simulation stop.
+[14/11/25 03:03:52] === WAREHOUSE SIMULATION STOPPED ===
+[14/11/25 03:03:52] Writing final binary report to completed_report.dat...
+[14/11/25 03:03:52] Final report written successfully. Total requests: 0

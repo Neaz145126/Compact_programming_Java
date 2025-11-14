@@ -1,0 +1,34 @@
+==== Log started at [14/11/25 03:09:57] ====
+[14/11/25 03:09:57] Inventory initialized. Total stock: 135 / 500
+[14/11/25 03:10:08] Removed 5 units of Air Filter. Remaining: 25
+[14/11/25 03:10:15] Removed 5 units of Air Filter. Remaining: 20
+[14/11/25 03:10:17] Removed 5 units of Air Filter. Remaining: 15
+[14/11/25 03:10:19] Removed 5 units of Air Filter. Remaining: 10
+[14/11/25 03:10:22] Removed 5 units of Air Filter. Remaining: 5
+[14/11/25 03:10:23] Removed 5 units of Air Filter. Remaining: 0
+[14/11/25 03:10:25] Error: Not enough stock of Air Filter. Requested: 5, Available: 0
+[14/11/25 03:10:29] Error: Not enough stock of Brake Disc. Requested: 1, Available: 0
+[14/11/25 03:10:31] Error: Not enough stock of Brake Disc. Requested: 1, Available: 0
+[14/11/25 03:10:32] Error: Not enough stock of Brake Disc. Requested: 1, Available: 0
+[14/11/25 03:10:34] Error: Not enough stock of Brake Disc. Requested: 1, Available: 0
+[14/11/25 03:10:36] Error: Not enough stock of Brake Disc. Requested: 1, Available: 0
+[14/11/25 03:10:37] Error: Not enough stock of Brake Disc. Requested: 1, Available: 0
+[14/11/25 03:10:39] Error: Not enough stock of Brake Disc. Requested: 1, Available: 0
+[14/11/25 03:10:49] Removed 1 units of Oil Filter. Remaining: 24
+[14/11/25 03:10:51] Removed 1 units of Oil Filter. Remaining: 23
+[14/11/25 03:10:53] Removed 1 units of Oil Filter. Remaining: 22
+[14/11/25 03:10:54] Removed 1 units of Oil Filter. Remaining: 21
+[14/11/25 03:10:56] Removed 1 units of Oil Filter. Remaining: 20
+[14/11/25 03:10:57] Removed 1 units of Oil Filter. Remaining: 19
+[14/11/25 03:10:58] Removed 1 units of Oil Filter. Remaining: 18
+[14/11/25 03:11:00] Removed 1 units of Oil Filter. Remaining: 17
+[14/11/25 03:11:02] Removed 1 units of Oil Filter. Remaining: 16
+[14/11/25 03:11:03] Removed 1 units of Oil Filter. Remaining: 15
+[14/11/25 03:11:05] Removed 1 units of Oil Filter. Remaining: 14
+[14/11/25 03:11:07] Removed 1 units of Oil Filter. Remaining: 13
+[14/11/25 03:11:08] Removed 1 units of Oil Filter. Remaining: 12
+[14/11/25 03:11:09] Removed 1 units of Oil Filter. Remaining: 11
+[14/11/25 03:11:11] Removed 1 units of Oil Filter. Remaining: 10
+[14/11/25 03:11:18] Removed 1 units of Oil Filter. Remaining: 9
+[14/11/25 03:11:21] Removed 1 units of Oil Filter. Remaining: 8
+[14/11/25 03:11:32] Removed 1 units of Oil Filter. Remaining: 7

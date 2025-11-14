@@ -1,0 +1,23 @@
+==== Log started at [14/11/25 02:46:32] ====
+[14/11/25 02:46:32] PartRequestManager initialized.
+[14/11/25 02:47:05] PartRequestManager thread started.
+[14/11/25 02:47:09] GUI added new request: PartRequest[requestID=Task-1, part=Part[partID=P1001, name=Oil Filter, description=Standard oil filter], neededQuantity=5, status=PENDING]
+[14/11/25 02:47:16] GUI added new request: PartRequest[requestID=Task-2, part=Part[partID=P1001, name=Oil Filter, description=Standard oil filter], neededQuantity=5, status=PENDING]
+[14/11/25 02:47:21] GUI added new request: PartRequest[requestID=Task-3, part=Part[partID=P1001, name=Oil Filter, description=Standard oil filter], neededQuantity=5, status=PENDING]
+[14/11/25 02:47:26] GUI added new request: PartRequest[requestID=Task-4, part=Part[partID=P1001, name=Oil Filter, description=Standard oil filter], neededQuantity=5, status=PENDING]
+[14/11/25 02:47:39] GUI added new request: PartRequest[requestID=Task-5, part=Part[partID=P1004, name=Brake Pad, description=Front ceramic pads], neededQuantity=5, status=PENDING]
+[14/11/25 02:47:48] GUI added new request: PartRequest[requestID=Task-6, part=Part[partID=P1004, name=Brake Pad, description=Front ceramic pads], neededQuantity=5, status=PENDING]
+[14/11/25 02:47:53] GUI added new request: PartRequest[requestID=Task-7, part=Part[partID=P1004, name=Brake Pad, description=Front ceramic pads], neededQuantity=8, status=PENDING]
+[14/11/25 02:47:57] GUI added new request: PartRequest[requestID=Task-8, part=Part[partID=P1001, name=Oil Filter, description=Standard oil filter], neededQuantity=8, status=PENDING]
+[14/11/25 02:48:08] GUI added new request: PartRequest[requestID=Task-9, part=Part[partID=P1001, name=Oil Filter, description=Standard oil filter], neededQuantity=4, status=PENDING]
+[14/11/25 02:48:21] GUI added new request: PartRequest[requestID=Task-10, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=8, status=PENDING]
+[14/11/25 02:48:24] GUI added new request: PartRequest[requestID=Task-11, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=8, status=PENDING]
+[14/11/25 02:48:26] GUI added new request: PartRequest[requestID=Task-12, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=8, status=PENDING]
+[14/11/25 02:48:27] GUI added new request: PartRequest[requestID=Task-13, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=8, status=PENDING]
+[14/11/25 02:48:30] GUI added new request: PartRequest[requestID=Task-14, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=8, status=PENDING]
+[14/11/25 02:48:32] GUI added new request: PartRequest[requestID=Task-15, part=Part[partID=P1002, name=Air Filter, description=Engine air filter], neededQuantity=8, status=PENDING]
+[14/11/25 02:48:40] GUI added new request: PartRequest[requestID=Task-16, part=Part[partID=P1003, name=Spark Plug, description=Iridium spark plug], neededQuantity=5, status=PENDING]
+[14/11/25 02:48:43] GUI added new request: PartRequest[requestID=Task-17, part=Part[partID=P1003, name=Spark Plug, description=Iridium spark plug], neededQuantity=5, status=PENDING]
+[14/11/25 02:48:46] GUI added new request: PartRequest[requestID=Task-18, part=Part[partID=P1003, name=Spark Plug, description=Iridium spark plug], neededQuantity=5, status=PENDING]
+[14/11/25 02:48:48] GUI added new request: PartRequest[requestID=Task-19, part=Part[partID=P1003, name=Spark Plug, description=Iridium spark plug], neededQuantity=5, status=PENDING]
+[14/11/25 02:48:50] GUI added new request: PartRequest[requestID=Task-20, part=Part[partID=P1003, name=Spark Plug, description=Iridium spark plug], neededQuantity=5, status=PENDING]

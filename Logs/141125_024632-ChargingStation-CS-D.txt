@@ -1,0 +1,14 @@
+==== Log started at [14/11/25 02:46:32] ====
+[14/11/25 02:46:32] Charging station CS-D initialized and ready.
+[14/11/25 02:47:05] Station thread CS-D started. Waiting for robots.
+[14/11/25 02:48:27] Station CS-D docked Robot R-004. Starting charge.
+[14/11/25 02:48:27] Station CS-D charging Robot R-004... (26%)
+[14/11/25 02:48:28] Station CS-D charging Robot R-004... (36%)
+[14/11/25 02:48:28] Station CS-D charging Robot R-004... (46%)
+[14/11/25 02:48:29] Station CS-D charging Robot R-004... (56%)
+[14/11/25 02:48:29] Station CS-D charging Robot R-004... (66%)
+[14/11/25 02:48:30] Station CS-D charging Robot R-004... (76%)
+[14/11/25 02:48:30] Station CS-D charging Robot R-004... (86%)
+[14/11/25 02:48:31] Station CS-D charging Robot R-004... (96%)
+[14/11/25 02:48:31] Station CS-D charging Robot R-004... (100%)
+[14/11/25 02:48:31] Station CS-D charging complete for Robot R-004

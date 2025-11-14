@@ -1,0 +1,16 @@
+==== Log started at [14/11/25 04:10:43] ====
+[14/11/25 04:10:43] PartRequestManager initialized.
+[14/11/25 04:10:43] PartRequestManager thread started. Polling file every 5000ms.
+[14/11/25 04:10:47] GUI added new request: PartRequest[requestID=Task-1, part=Part[partID=P1001, name=Oil Filter, description=Standard oil filter], neededQuantity=3, status=PENDING]
+[14/11/25 04:10:54] GUI added new request: PartRequest[requestID=Task-2, part=Part[partID=P1003, name=Spark Plug, description=Iridium spark plug], neededQuantity=6, status=PENDING]
+[14/11/25 04:10:58] GUI added new request: PartRequest[requestID=Task-3, part=Part[partID=P1004, name=Brake Pad, description=Front ceramic pads], neededQuantity=6, status=PENDING]
+[14/11/25 04:11:01] GUI added new request: PartRequest[requestID=Task-4, part=Part[partID=P1004, name=Brake Pad, description=Front ceramic pads], neededQuantity=6, status=PENDING]
+[14/11/25 04:11:06] GUI added new request: PartRequest[requestID=Task-5, part=Part[partID=P1A008, name=Taillight Bulb, description=P21W bulb], neededQuantity=6, status=PENDING]
+[14/11/25 04:11:09] GUI added new request: PartRequest[requestID=Task-6, part=Part[partID=P1006, name=Wiper Blade, description=22-inch all-weather], neededQuantity=6, status=PENDING]
+[14/11/25 04:11:13] GUI added new request: PartRequest[requestID=Task-7, part=Part[partID=P1004, name=Brake Pad, description=Front ceramic pads], neededQuantity=6, status=PENDING]
+[14/11/25 04:11:16] GUI added new request: PartRequest[requestID=Task-8, part=Part[partID=P1007, name=Headlight Bulb, description=H4 Halogen bulb], neededQuantity=6, status=PENDING]
+[14/11/25 04:11:28] GUI added new request: PartRequest[requestID=Task-9, part=Part[partID=P1010, name=Alternator, description=120A alternator], neededQuantity=6, status=PENDING]
+[14/11/25 04:11:33] GUI added new request: PartRequest[requestID=Task-10, part=Part[partID=P1010, name=Alternator, description=120A alternator], neededQuantity=3, status=PENDING]
+[14/11/25 04:11:34] GUI added new request: PartRequest[requestID=Task-11, part=Part[partID=P1010, name=Alternator, description=120A alternator], neededQuantity=3, status=PENDING]
+[14/11/25 04:11:36] GUI added new request: PartRequest[requestID=Task-12, part=Part[partID=P1010, name=Alternator, description=120A alternator], neededQuantity=3, status=PENDING]
+[14/11/25 04:11:38] GUI added new request: PartRequest[requestID=Task-13, part=Part[partID=P1010, name=Alternator, description=120A alternator], neededQuantity=3, status=PENDING]
