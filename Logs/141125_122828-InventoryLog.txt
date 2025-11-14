@@ -1,0 +1,25 @@
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+[14/11/25 12:28:28] Removed 5 units of Oil Filter. Remaining: 20
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+[14/11/25 12:28:28] Part not found with ID: P8888
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+[14/11/25 12:28:28] Attempted to remove non-positive quantity: 0
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+[14/11/25 12:28:28] Removed 25 units of Oil Filter. Remaining: 0
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+[14/11/25 12:28:28] Error: Not enough stock of Oil Filter. Requested: 100, Available: 25
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+[14/11/25 12:28:28] Attempted to remove non-positive quantity: -5
+==== Log started at [14/11/25 12:28:28] ====
+[14/11/25 12:28:28] Inventory initialized. Total stock: 55 / 500
+[14/11/25 12:28:28] Error: Not enough stock of Missing Part. Requested: 1, Available: 0
