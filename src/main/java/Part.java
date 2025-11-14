@@ -1,0 +1,1 @@
+public record Part(String partID, String name, String description) {}
